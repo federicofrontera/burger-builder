@@ -16,7 +16,8 @@ const buildControls = (props) => {
                 <BuildControl
                     key={ctrl.label}
                     label={ctrl.label}
-                    more={() => props.ingredientAdded(ctrl.type)}/>
+                    more={() => props.ingredientAdded(ctrl.type)}
+                    less={() => props.ingredientRemoved(ctrl.type)}/>
             ))}
         </div>
     );
