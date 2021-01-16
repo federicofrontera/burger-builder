@@ -77,7 +77,7 @@ local.properties
 ######################
 # Intellij
 ######################
-*.idea/
+*.idea/*
 *.iml
 *.iws
 *.ipr
@@ -168,4 +168,4 @@ Desktop.ini
 *.releaseBackup
 release.properties
 release.properties
-/.idea/
+/.idea/*
