@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Burger.module.css'
-import BurgerIngredient from "../BurgerIngredients/BurgerIngredient";
+import BurgerIngredient from "./BurgerIngredients/BurgerIngredient";
 
 const Burger = (props) => {
     let ingredientsArray = Object.keys(props.ingredients)
