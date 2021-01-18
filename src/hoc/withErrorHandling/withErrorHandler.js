@@ -5,9 +5,11 @@ import Auxiliary from "../Auxiliary/Auxiliary";
 
 function WithErrorHandler(WrappedComponent, axios) {
     return class extends React.Component {
+
         state = {
             error: null
         }
+
 
         render() {
             return (
@@ -21,15 +23,20 @@ function WithErrorHandler(WrappedComponent, axios) {
             );
         }
 
-        componentDidMount() {
-            axios.interceptors.request.use(req => {
+        UNSAFE_componentWillMount() {
+            this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({error: null})
                 return req;
             });
 
-            axios.interceptors.response.use(res => res, error => {
+            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error})
             });
+        }
+
+        componentWillUnmount() {
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.request.eject(this.resInterceptor);
         }
 
         errorConfirmedHandler = () => {
