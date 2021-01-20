@@ -11,11 +11,11 @@ function CheckoutSummary(props) {
                 <Burger ingredients={props.ingredients}/>
             </div>
             <Button
-                btnTye="Danger"
-                clicked>CANCEL</Button>
+                btnType="Danger"
+                clicked={props.checkoutCancelled}>CANCEL</Button>
             <Button
-                btnTye="Success"
-                clicked>CONTINUE</Button>
+                btnType="Success"
+                clicked={props.checkoutContinued}>CONTINUE</Button>
         </div>
     );
 }
