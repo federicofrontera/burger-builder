@@ -87,28 +87,29 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Burger Lover',
-                address: {
-                    street: 'Fake Street 123',
-                    zipCode: '4141',
-                    country: 'Fake Country'
-                },
-                email: 'fake@fake.com'
-            },
-            deliveryMethod: 'fastest'
-        }
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-                this.setState({loading: false, purchasing: false});
-            });
+        /*        this.setState({loading: true})
+                const order = {
+                    ingredients: this.state.ingredients,
+                    price: this.state.totalPrice,
+                    customer: {
+                        name: 'Burger Lover',
+                        address: {
+                            street: 'Fake Street 123',
+                            zipCode: '4141',
+                            country: 'Fake Country'
+                        },
+                        email: 'fake@fake.com'
+                    },
+                    deliveryMethod: 'fastest'
+                }
+                axios.post('/orders.json', order)
+                    .then(response => {
+                        this.setState({loading: false, purchasing: false});
+                    })
+                    .catch(error => {
+                        this.setState({loading: false, purchasing: false});
+                    });*/
+        this.props.history.push('/checkout');
     }
 
     render() {
@@ -124,21 +125,23 @@ class BurgerBuilder extends Component {
         let burger = this.state.error ? <p>Error loading ingredients. Try again later.</p> : <Spinner/>;
 
         if (this.state.ingredients) {
-            burger = <Auxiliary>
-                <Burger ingredients={this.state.ingredients}/>
-                <BuildControls
-                    ingredientAdded={this.addIngredientHandler}
-                    ingredientRemoved={this.removeIngredientHandler}
-                    disabled={disabledInfo}
-                    purchasable={this.state.purchasable}
-                    ordered={this.purchaseHandler}
-                    price={this.state.totalPrice}/>
-            </Auxiliary>;
-            orderSummary = <OrderSummary
-                ingredients={this.state.ingredients}
-                price={this.state.totalPrice}
-                purchaseCancelled={this.purchaseCancelHandler}
-                purchaseContinued={this.purchaseContinueHandler}/>;
+            burger =
+                <Auxiliary>
+                    <Burger ingredients={this.state.ingredients}/>
+                    <BuildControls
+                        ingredientAdded={this.addIngredientHandler}
+                        ingredientRemoved={this.removeIngredientHandler}
+                        disabled={disabledInfo}
+                        purchasable={this.state.purchasable}
+                        ordered={this.purchaseHandler}
+                        price={this.state.totalPrice}/>
+                </Auxiliary>;
+            orderSummary =
+                <OrderSummary
+                    ingredients={this.state.ingredients}
+                    price={this.state.totalPrice}
+                    purchaseCancelled={this.purchaseCancelHandler}
+                    purchaseContinued={this.purchaseContinueHandler}/>;
         }
         if (this.state.loading) {
             orderSummary = <Spinner/>
