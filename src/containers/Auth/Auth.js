@@ -83,9 +83,13 @@ class Auth extends Component {
         return isValid;
     }
 
-    submitHandler = (event) => {
+    signUpHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);;
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true);
+    }
+    signInHandler = (event) => {
+        event.preventDefault();
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
     }
 
     render() {
@@ -109,13 +113,16 @@ class Auth extends Component {
                 />
             )
         );
+        const signUpButton = <Button btnType="Success" clicked={this.signUpHandler}>SIGN UP</Button>
+        const signInButton = <Button btnType="Success" clicked={this.signInHandler}>SIGN IN</Button>
+
 
         return (
-
             <div className={styles.Auth}>
-                <form onSubmit={this.submitHandler}>
+                <form >
                     {form}
-                    <Button btnType="Success">SUBMIT</Button>
+                    {signUpButton}
+                    {signInButton}
                 </form>
             </div>
         );
@@ -126,7 +133,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
+        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
     }
 }
 
