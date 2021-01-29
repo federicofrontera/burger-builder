@@ -23,7 +23,7 @@ const setIngredients = (ingredients) => {
 
 const fetchIngredientsFailed = () => {
     return {
-        type: actionTypes.FETCH_INGREDIENTS_FAILED
+        type: actionTypes.FETCH_INGREDIENTS_FAILURE
     }
 }
 
