@@ -7,7 +7,7 @@ const button = (props) => (
         disabled={props.disabled}
         className={[styles.Button, styles[props.btnType]].join(' ')}
         onClick={props.clicked}
-        autocomplete="off"
+        autoComplete="off"
     >{props.children}
 
     </button>

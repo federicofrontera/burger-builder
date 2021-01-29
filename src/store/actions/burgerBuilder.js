@@ -38,3 +38,9 @@ export const initIngredients = () => {
             });
     }
 }
+
+export const initPrice = () => {
+    return {
+        type: actionTypes.INIT_PRICE
+    }
+}
