@@ -8,14 +8,16 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (authData) => {
+export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        token: token,
+        userId: userId
     }
 }
 
 export const authFailure = (error) => {
+    console.log(error)
     return {
         type: actionTypes.AUTH_FAILURE,
         error: error
@@ -34,11 +36,11 @@ export const auth = (email, password, isSignUp = false) => {
             : `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
         axios.post(url,authData)
             .then(response => {
-                console.log(response);
-                dispatch(authSuccess(response.data));
+                //console.log(response.data.idToken);
+                dispatch(authSuccess(response.data.idToken, response.data.localId));
             })
             .catch(err => {
-                console.log(err);
+                //console.log(err);
                 dispatch(authFailure(err));
             })
     }
