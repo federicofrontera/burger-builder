@@ -169,3 +169,8 @@ Desktop.ini
 release.properties
 release.properties
 /.idea/*
+
+######################
+# Enviroment Variables
+######################
+.env
