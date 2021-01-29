@@ -41,7 +41,7 @@ export const auth = (email, password, isSignUp = false) => {
             })
             .catch(err => {
                 //console.log(err);
-                dispatch(authFailure(err));
+                dispatch(authFailure(err.response.data.error));
             })
     }
 }
