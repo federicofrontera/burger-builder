@@ -42,6 +42,13 @@ class Auth extends Component {
         }
     }
 
+    componentDidMount() {
+        if (!this.props.buildingBurger && this.props.authRedirectPath === '/checkout'){
+            this.props.onSetAuthRedirectPath()
+        }
+    }
+
+
     inputChangedHandler = (event, controlName) => {
         const updatedControls = {
             ...this.state.controls,
@@ -127,7 +134,7 @@ class Auth extends Component {
             form = <Spinner/>
         }
         let errorMessage = this.props.error ? <p>{this.props.error.message}</p> : null
-        const authRedirect = this.props.isAuthenticated ? <Redirect to="/"/> : null
+        const authRedirect = this.props.isAuthenticated ? <Redirect to={this.props.authRedirectPath}/> : null
         return (
             <div className={styles.Auth}>
                 {authRedirect}
@@ -144,13 +151,16 @@ const mapStateToProps = (state) => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
+        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     }
 }
 
