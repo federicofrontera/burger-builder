@@ -11,7 +11,6 @@ import burgerBuilderReducer from './store/reducers/burgerBuilder'
 import orderReducer from './store/reducers/order'
 import authReducer from './store/reducers/auth'
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ serialize: true, latency: 0, features: {persist: false} })  || compose;
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,

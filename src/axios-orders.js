@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-   baseURL: 'https://react-burger-builder-71d68-default-rtdb.firebaseio.com/'
+   baseURL: `${process.env.REACT_APP_DB_URL}`
 });
 
 export default instance;

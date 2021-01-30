@@ -24,6 +24,20 @@ export const authFailure = (error) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    };
+};
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout());
+        },expirationTime * 1000)
+    }
+}
+
 export const auth = (email, password, isSignUp = false) => {
     return dispatch => {
         dispatch(authStart());
@@ -32,12 +46,13 @@ export const auth = (email, password, isSignUp = false) => {
             password: password,
             returnSecureToken: true
         }
-        const url =  isSignUp ? `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`
+        const url = isSignUp ? `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`
             : `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
-        axios.post(url,authData)
+        axios.post(url, authData)
             .then(response => {
                 //console.log(response.data.idToken);
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {
                 //console.log(err);
