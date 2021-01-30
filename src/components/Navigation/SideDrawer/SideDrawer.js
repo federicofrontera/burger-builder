@@ -13,8 +13,8 @@ function SideDrawer(props) {
 
     return (
         <Auxiliary>
-            <Backdrop show={props.show} clicked={props.closed}/>
-            <div className={classes.join(' ')}>
+            <Backdrop show={props.show} clicked={props.closed} />
+            <div className={classes.join(' ')} onClick={props.closed}>
                 <div className={styles.Logo}>
                     <Logo/>
                 </div>
