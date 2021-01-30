@@ -100,8 +100,6 @@ class Auth extends Component {
             form = <Spinner/>
         }
         let errorMessage = this.props.error ? <p>{this.props.error.message}</p> : null
-        console.log('auth? ' + this.props.isAuthenticated)
-
         const authRedirect = this.props.isAuthenticated ? <Redirect to={this.props.authRedirectPath}/> : null
         return (
             <div className={styles.Auth}>

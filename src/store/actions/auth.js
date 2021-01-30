@@ -17,7 +17,6 @@ export const authSuccess = (token, userId) => {
 }
 
 export const authFailure = (error) => {
-    console.log(error)
     return {
         type: actionTypes.AUTH_FAILURE,
         error: error
@@ -53,7 +52,6 @@ export const auth = (email, password, isSignUp = false) => {
             : `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
         axios.post(url, authData)
             .then(response => {
-                //console.log(response.data.idToken);
                 const expiration = new Date((new Date().getTime() + response.data.expiresIn * 1000));
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('userId', response.data.localId);
@@ -62,7 +60,6 @@ export const auth = (email, password, isSignUp = false) => {
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {
-                //console.log(err);
                 dispatch(authFailure(err.response.data.error));
             })
     }
