@@ -1,7 +1,7 @@
 import reducer from './auth'
 import * as actionTypes from '../actions/actionTypes'
 
-describe('auth redicer', () => {
+describe('auth reducer', () => {
     it('should return initial state if no action is received', () => {
         expect(reducer(undefined, {})).toEqual(
             {
