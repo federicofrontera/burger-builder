@@ -174,3 +174,5 @@ release.properties
 # Enviroment Variables
 ######################
 .env
+/firebase.json
+/.firebaserc
